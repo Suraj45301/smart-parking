@@ -8,7 +8,7 @@ const slotRoutes = require("./routes/slotRoutes");
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: ["http://localhost:3000", "https://smart-parking-ruby.vercel.app"] }));
 app.use(express.json());
 
 // Routes
