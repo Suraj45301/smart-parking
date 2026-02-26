@@ -17,7 +17,12 @@ export default function App() {
   const fetchSlots = useCallback(async () => {
     try {
       const res = await getAllSlots();
-      setSlots(res.data.data);
+      if (res.data && Array.isArray(res.data.data)) {
+        setSlots(res.data.data);
+      } else {
+        toast.error("Invalid API endpoint configured.");
+        setSlots([]); // Fallback to empty array to prevent crash
+      }
     } catch {
       toast.error("Failed to fetch slots");
     } finally {
